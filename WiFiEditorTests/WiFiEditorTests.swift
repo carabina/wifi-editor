@@ -9,7 +9,7 @@
 import Cocoa
 import XCTest
 
-class NSTableViewTests: XCTestCase {
+class WiFiEditorTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

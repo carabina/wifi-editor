@@ -3,15 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51880EE11BA2330800D3724E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBF1AF9750D003C4F32 /* Main.storyboard */; };
+		51880EE21BA2330B00D3724E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBD1AF9750D003C4F32 /* Images.xcassets */; };
 		78018CBA1AF9750D003C4F32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CB91AF9750D003C4F32 /* AppDelegate.swift */; };
 		78018CBC1AF9750D003C4F32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CBB1AF9750D003C4F32 /* ViewController.swift */; };
-		78018CBE1AF9750D003C4F32 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBD1AF9750D003C4F32 /* Images.xcassets */; };
-		78018CC11AF9750D003C4F32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBF1AF9750D003C4F32 /* Main.storyboard */; };
-		78018CCD1AF9750D003C4F32 /* NSTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CCC1AF9750D003C4F32 /* NSTableViewTests.swift */; };
+		78018CCD1AF9750D003C4F32 /* WiFiEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CCC1AF9750D003C4F32 /* WiFiEditorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,20 +20,20 @@
 			containerPortal = 78018CAC1AF9750D003C4F32 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 78018CB31AF9750D003C4F32;
-			remoteInfo = NSTableView;
+			remoteInfo = WiFiEditor;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		78018CB41AF9750D003C4F32 /* NSTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NSTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		78018CB41AF9750D003C4F32 /* WiFi Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WiFi Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78018CB81AF9750D003C4F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78018CB91AF9750D003C4F32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78018CBB1AF9750D003C4F32 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		78018CBD1AF9750D003C4F32 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		78018CC01AF9750D003C4F32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		78018CC61AF9750D003C4F32 /* NSTableViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NSTableViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		78018CC61AF9750D003C4F32 /* WiFi EditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WiFi EditorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78018CCB1AF9750D003C4F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		78018CCC1AF9750D003C4F32 /* NSTableViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTableViewTests.swift; sourceTree = "<group>"; };
+		78018CCC1AF9750D003C4F32 /* WiFiEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiEditorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +57,8 @@
 		78018CAB1AF9750D003C4F32 = {
 			isa = PBXGroup;
 			children = (
-				78018CB61AF9750D003C4F32 /* NSTableView */,
-				78018CC91AF9750D003C4F32 /* NSTableViewTests */,
+				78018CB61AF9750D003C4F32 /* WiFiEditor */,
+				78018CC91AF9750D003C4F32 /* WifiEditorTests */,
 				78018CB51AF9750D003C4F32 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,13 +66,13 @@
 		78018CB51AF9750D003C4F32 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				78018CB41AF9750D003C4F32 /* NSTableView.app */,
-				78018CC61AF9750D003C4F32 /* NSTableViewTests.xctest */,
+				78018CB41AF9750D003C4F32 /* WiFi Editor.app */,
+				78018CC61AF9750D003C4F32 /* WiFi EditorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		78018CB61AF9750D003C4F32 /* NSTableView */ = {
+		78018CB61AF9750D003C4F32 /* WiFiEditor */ = {
 			isa = PBXGroup;
 			children = (
 				78018CB91AF9750D003C4F32 /* AppDelegate.swift */,
@@ -81,7 +81,8 @@
 				78018CBF1AF9750D003C4F32 /* Main.storyboard */,
 				78018CB71AF9750D003C4F32 /* Supporting Files */,
 			);
-			path = NSTableView;
+			name = WiFiEditor;
+			path = WiFiEditor;
 			sourceTree = "<group>";
 		};
 		78018CB71AF9750D003C4F32 /* Supporting Files */ = {
@@ -92,13 +93,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		78018CC91AF9750D003C4F32 /* NSTableViewTests */ = {
+		78018CC91AF9750D003C4F32 /* WifiEditorTests */ = {
 			isa = PBXGroup;
 			children = (
-				78018CCC1AF9750D003C4F32 /* NSTableViewTests.swift */,
+				78018CCC1AF9750D003C4F32 /* WiFiEditorTests.swift */,
 				78018CCA1AF9750D003C4F32 /* Supporting Files */,
 			);
-			path = NSTableViewTests;
+			name = WifiEditorTests;
+			path = WiFiEditorTests;
 			sourceTree = "<group>";
 		};
 		78018CCA1AF9750D003C4F32 /* Supporting Files */ = {
@@ -112,9 +114,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		78018CB31AF9750D003C4F32 /* NSTableView */ = {
+		78018CB31AF9750D003C4F32 /* WiFi Editor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 78018CD01AF9750D003C4F32 /* Build configuration list for PBXNativeTarget "NSTableView" */;
+			buildConfigurationList = 78018CD01AF9750D003C4F32 /* Build configuration list for PBXNativeTarget "WiFi Editor" */;
 			buildPhases = (
 				78018CB01AF9750D003C4F32 /* Sources */,
 				78018CB11AF9750D003C4F32 /* Frameworks */,
@@ -124,14 +126,14 @@
 			);
 			dependencies = (
 			);
-			name = NSTableView;
-			productName = NSTableView;
-			productReference = 78018CB41AF9750D003C4F32 /* NSTableView.app */;
+			name = "WiFi Editor";
+			productName = WiFiEditor;
+			productReference = 78018CB41AF9750D003C4F32 /* WiFi Editor.app */;
 			productType = "com.apple.product-type.application";
 		};
-		78018CC51AF9750D003C4F32 /* NSTableViewTests */ = {
+		78018CC51AF9750D003C4F32 /* WiFi EditorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 78018CD31AF9750D003C4F32 /* Build configuration list for PBXNativeTarget "NSTableViewTests" */;
+			buildConfigurationList = 78018CD31AF9750D003C4F32 /* Build configuration list for PBXNativeTarget "WiFi EditorTests" */;
 			buildPhases = (
 				78018CC21AF9750D003C4F32 /* Sources */,
 				78018CC31AF9750D003C4F32 /* Frameworks */,
@@ -142,9 +144,9 @@
 			dependencies = (
 				78018CC81AF9750D003C4F32 /* PBXTargetDependency */,
 			);
-			name = NSTableViewTests;
-			productName = NSTableViewTests;
-			productReference = 78018CC61AF9750D003C4F32 /* NSTableViewTests.xctest */;
+			name = "WiFi EditorTests";
+			productName = WiFiEditorTests;
+			productReference = 78018CC61AF9750D003C4F32 /* WiFi EditorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -154,7 +156,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = "Vea Software";
+				ORGANIZATIONNAME = Nitroba;
 				TargetAttributes = {
 					78018CB31AF9750D003C4F32 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -165,8 +167,8 @@
 					};
 				};
 			};
-			buildConfigurationList = 78018CAF1AF9750D003C4F32 /* Build configuration list for PBXProject "NSTableView" */;
-			compatibilityVersion = "Xcode 3.2";
+			buildConfigurationList = 78018CAF1AF9750D003C4F32 /* Build configuration list for PBXProject "WiFi Editor" */;
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -178,8 +180,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				78018CB31AF9750D003C4F32 /* NSTableView */,
-				78018CC51AF9750D003C4F32 /* NSTableViewTests */,
+				78018CB31AF9750D003C4F32 /* WiFi Editor */,
+				78018CC51AF9750D003C4F32 /* WiFi EditorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -189,8 +191,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78018CBE1AF9750D003C4F32 /* Images.xcassets in Resources */,
-				78018CC11AF9750D003C4F32 /* Main.storyboard in Resources */,
+				51880EE21BA2330B00D3724E /* Images.xcassets in Resources */,
+				51880EE11BA2330800D3724E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78018CCD1AF9750D003C4F32 /* NSTableViewTests.swift in Sources */,
+				78018CCD1AF9750D003C4F32 /* WiFiEditorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,7 +228,7 @@
 /* Begin PBXTargetDependency section */
 		78018CC81AF9750D003C4F32 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 78018CB31AF9750D003C4F32 /* NSTableView */;
+			target = 78018CB31AF9750D003C4F32 /* WiFi Editor */;
 			targetProxy = 78018CC71AF9750D003C4F32 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -328,9 +330,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = NSTableView/Info.plist;
+				INFOPLIST_FILE = WiFiEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "WiFi Editor";
 			};
 			name = Debug;
 		};
@@ -339,9 +341,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = NSTableView/Info.plist;
+				INFOPLIST_FILE = WiFiEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "WiFi Editor";
 			};
 			name = Release;
 		};
@@ -358,10 +360,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = NSTableViewTests/Info.plist;
+				INFOPLIST_FILE = WiFiEditorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NSTableView.app/Contents/MacOS/NSTableView";
+				PRODUCT_NAME = "WiFi EditorTests";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WiFiEditor.app/Contents/MacOS/WiFiEditor";
 			};
 			name = Debug;
 		};
@@ -374,17 +376,17 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = NSTableViewTests/Info.plist;
+				INFOPLIST_FILE = WiFiEditorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NSTableView.app/Contents/MacOS/NSTableView";
+				PRODUCT_NAME = "WiFi EditorTests";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WiFiEditor.app/Contents/MacOS/WiFiEditor";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		78018CAF1AF9750D003C4F32 /* Build configuration list for PBXProject "NSTableView" */ = {
+		78018CAF1AF9750D003C4F32 /* Build configuration list for PBXProject "WiFi Editor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				78018CCE1AF9750D003C4F32 /* Debug */,
@@ -393,21 +395,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		78018CD01AF9750D003C4F32 /* Build configuration list for PBXNativeTarget "NSTableView" */ = {
+		78018CD01AF9750D003C4F32 /* Build configuration list for PBXNativeTarget "WiFi Editor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				78018CD11AF9750D003C4F32 /* Debug */,
 				78018CD21AF9750D003C4F32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		78018CD31AF9750D003C4F32 /* Build configuration list for PBXNativeTarget "NSTableViewTests" */ = {
+		78018CD31AF9750D003C4F32 /* Build configuration list for PBXNativeTarget "WiFi EditorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				78018CD41AF9750D003C4F32 /* Debug */,
 				78018CD51AF9750D003C4F32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
