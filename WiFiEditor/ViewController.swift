@@ -10,19 +10,23 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 {
 
     @IBOutlet weak var tableView: NSTableView!
-    var objects: NSMutableArray! = NSMutableArray()
     var networks = Dictionary<String, AnyObject>()
     var networkProperties = Set<String>()
+    var objects: NSMutableArray! = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
+
         let path = "/Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist"
         if let dict = NSDictionary(contentsOfFile: path) as? Dictionary<String, AnyObject> {
             networks = dict["KnownNetworks"] as! Dictionary<String, AnyObject>
             
-            for (net,vals) in networks {
+            // Go through all the networks, getting the
+            for (netName,vals) in networks {
+                objects.addObject(vals)         // so we can have a sorted list
+                println(vals)
                 let valDict = vals as! Dictionary<String, AnyObject>
                 for (propertyName, propertyVal) in (valDict) {
                         networkProperties.insert(propertyName)
@@ -30,7 +34,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             }
         }
         
-        // Now add all the property names
+        // Now add all the property names as colums
         for propertyName in networkProperties {
             var column = NSTableColumn()
             column.headerCell = NSTableHeaderCell()
@@ -38,7 +42,6 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             self.tableView.addTableColumn(column)
         }
         
-        println("Table columns "+String(self.tableView.tableColumns.count))
         //tableView.tableColumns[1].headerCell!.stringValue = "two" as! String
         //self.tableView.rowHeight = 15
         self.tableView.rowSizeStyle = NSTableViewRowSizeStyle.Default
@@ -67,7 +70,18 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         //println("col="+String(col!.integerValue))
         
         var cellView = tableView.makeViewWithIdentifier("cell", owner: self) as! NSTableCellView
-        cellView.textField!.stringValue = self.objects.objectAtIndex(row) as! String
+        
+        let network = objects.objectAtIndex(row) as! Dictionary<String, AnyObject>
+        
+        //if let val = network[tableColumn!.title] as? String {
+        //    cellView.textField!.stringValue = val
+        //} else {
+        cellView.textField?.alignment = NSTextAlignment.LeftTextAlignment
+        cellView.textField!.stringValue = ""
+        if let val: AnyObject = network[tableColumn!.title]  {
+            cellView.textField!.stringValue = "\(val)"
+        }
+
         //cellView.textField!.stringValue = "\(pow(Double(row),col!.doubleValue))"
         
         return cellView
@@ -75,13 +89,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     func tableViewSelectionDidChange(notification: NSNotification)
     {
-        if (self.tableView.numberOfSelectedRows > 0) {
-            let selectedItem = self.objects.objectAtIndex(self.tableView.selectedRow) as! String
-            
-            println(selectedItem)
-            
-            //self.tableView.deselectRow(self.tableView.selectedRow)
-        }
+        //if (self.tableView.numberOfSelectedRows > 0) {
+        //    let selectedItem = self.objects.objectAtIndex(self.tableView.selectedRow) as! String
+        //
+        //    println(selectedItem)
+        //
+        //    //self.tableView.deselectRow(self.tableView.selectedRow)
+        //}
         
     }
 
