@@ -11,7 +11,6 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
     @IBOutlet weak var tableView: NSTableView!
     var networks = Dictionary<String, Dictionary<String, AnyObject>>()
-    var networkProperties = Set<String>()
     var objects  = NSMutableArray()
     var selected =  Set<String>()
     
@@ -26,7 +25,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 ignoreSet = Set<String>(ignoreArray)
             }
         }
-
+        var networkProperties = Set<String>()
         let path = "/Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist"
         if let dict = NSDictionary(contentsOfFile: path) as? Dictionary<String, AnyObject> {
             networks = dict["KnownNetworks"] as! Dictionary<String, Dictionary<String, AnyObject>>
@@ -52,14 +51,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             self.tableView.addTableColumn(column)
         }
         
-        //tableView.tableColumns[1].headerCell!.stringValue = "two" as! String
-        //self.tableView.rowHeight = 15
         self.tableView.rowSizeStyle = NSTableViewRowSizeStyle.Default
-        
-        
         self.tableView.reloadData()
-
-        // Do any additional setup after loading the view.
     }
 
     override var representedObject: AnyObject? {
@@ -68,8 +61,6 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         }
     }
 
-    // MARK: - Table View
-    
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         return self.objects.count
     }
@@ -82,10 +73,11 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         tableColumn!.width = 40
         //var cellView = tableView.makeViewWithIdentifier("cell", owner: self) as! NSTableCellView
         
+        
         if let title = tableColumn?.title {
             let networkName = objects.objectAtIndex(row) as! String
             if title == "select" {
-                return selected.contains(networkName)
+                return selected.contains(networkName) || tableView.selectedRowIndexes.containsIndex(row)
             }
             let networkVals = networks[networkName]!
             if let val: AnyObject = networkVals[title]  {
@@ -101,13 +93,16 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     func tableViewSelectionDidChange(notification: NSNotification)
     {
-        //if (self.tableView.numberOfSelectedRows > 0) {
-        //    let selectedItem = self.objects.objectAtIndex(self.tableView.selectedRow) as! String
-        //
-        //    println(selectedItem)
-        //
-        //    //self.tableView.deselectRow(self.tableView.selectedRow)
-        //}
+        if (self.tableView.numberOfSelectedRows > 0) {
+            if let networkName = self.objects.objectAtIndex(self.tableView.selectedRow) as? String {
+                if selected.contains(networkName){
+                    selected.remove(networkName)
+                } else {
+                    selected.insert(networkName)
+                }
+            }
+            self.tableView.deselectRow(self.tableView.selectedRow)
+        }
         
     }
 }
