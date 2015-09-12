@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		51880EE11BA2330800D3724E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBF1AF9750D003C4F32 /* Main.storyboard */; };
 		51880EE21BA2330B00D3724E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBD1AF9750D003C4F32 /* Images.xcassets */; };
+		51C389AE1BA3A50900E92A53 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51C389AD1BA3A50900E92A53 /* config.plist */; };
+		51C389B21BA474AB00E92A53 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C389B11BA474AB00E92A53 /* ViewController.swift */; };
 		78018CBA1AF9750D003C4F32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CB91AF9750D003C4F32 /* AppDelegate.swift */; };
-		78018CBC1AF9750D003C4F32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CBB1AF9750D003C4F32 /* ViewController.swift */; };
 		78018CCD1AF9750D003C4F32 /* WiFiEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CCC1AF9750D003C4F32 /* WiFiEditorTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,10 +26,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		51C389AD1BA3A50900E92A53 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		51C389B11BA474AB00E92A53 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		78018CB41AF9750D003C4F32 /* WiFi Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WiFi Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78018CB81AF9750D003C4F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78018CB91AF9750D003C4F32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		78018CBB1AF9750D003C4F32 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		78018CBD1AF9750D003C4F32 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		78018CC01AF9750D003C4F32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		78018CC61AF9750D003C4F32 /* WiFi EditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WiFi EditorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,12 +78,12 @@
 			isa = PBXGroup;
 			children = (
 				78018CB91AF9750D003C4F32 /* AppDelegate.swift */,
-				78018CBB1AF9750D003C4F32 /* ViewController.swift */,
+				51C389B11BA474AB00E92A53 /* ViewController.swift */,
+				51C389AD1BA3A50900E92A53 /* config.plist */,
 				78018CBD1AF9750D003C4F32 /* Images.xcassets */,
 				78018CBF1AF9750D003C4F32 /* Main.storyboard */,
 				78018CB71AF9750D003C4F32 /* Supporting Files */,
 			);
-			name = WiFiEditor;
 			path = WiFiEditor;
 			sourceTree = "<group>";
 		};
@@ -193,6 +195,7 @@
 			files = (
 				51880EE21BA2330B00D3724E /* Images.xcassets in Resources */,
 				51880EE11BA2330800D3724E /* Main.storyboard in Resources */,
+				51C389AE1BA3A50900E92A53 /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78018CBC1AF9750D003C4F32 /* ViewController.swift in Sources */,
+				51C389B21BA474AB00E92A53 /* ViewController.swift in Sources */,
 				78018CBA1AF9750D003C4F32 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
