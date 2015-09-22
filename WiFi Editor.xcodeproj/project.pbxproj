@@ -11,6 +11,7 @@
 		51880EE21BA2330B00D3724E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBD1AF9750D003C4F32 /* Images.xcassets */; };
 		51C389AE1BA3A50900E92A53 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51C389AD1BA3A50900E92A53 /* config.plist */; };
 		51C389B21BA474AB00E92A53 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C389B11BA474AB00E92A53 /* ViewController.swift */; };
+		51D057C41BB0BF1300FC7DE5 /* WifiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D057C31BB0BF1300FC7DE5 /* WifiModel.swift */; settings = {ASSET_TAGS = (); }; };
 		78018CBA1AF9750D003C4F32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CB91AF9750D003C4F32 /* AppDelegate.swift */; };
 		78018CCD1AF9750D003C4F32 /* WiFiEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CCC1AF9750D003C4F32 /* WiFiEditorTests.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		51C389AD1BA3A50900E92A53 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		51C389B11BA474AB00E92A53 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		51D057C31BB0BF1300FC7DE5 /* WifiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiModel.swift; sourceTree = "<group>"; };
 		78018CB41AF9750D003C4F32 /* WiFi Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WiFi Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78018CB81AF9750D003C4F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78018CB91AF9750D003C4F32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				78018CB91AF9750D003C4F32 /* AppDelegate.swift */,
+				51D057C31BB0BF1300FC7DE5 /* WifiModel.swift */,
 				51C389B11BA474AB00E92A53 /* ViewController.swift */,
 				51C389AD1BA3A50900E92A53 /* config.plist */,
 				78018CBD1AF9750D003C4F32 /* Images.xcassets */,
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51C389B21BA474AB00E92A53 /* ViewController.swift in Sources */,
+				51D057C41BB0BF1300FC7DE5 /* WifiModel.swift in Sources */,
 				78018CBA1AF9750D003C4F32 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,7 +11,7 @@
 import Cocoa
 import Foundation
 
-class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate
+class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSWindowDelegate
 {
 
     @IBOutlet weak var tableView: NSTableView!
@@ -19,17 +19,17 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     @IBOutlet weak var totalSelectedCell: NSTextField!
     @IBOutlet weak var searchField: NSSearchField!
     @IBOutlet weak var statusField: NSTextField!
+    var model:WifiModel!
     
-
-    var networks = Dictionary<String, Dictionary<String, AnyObject>>()
-    var displayedNetworks  = NSMutableArray()
-    var selectedNetworks =  Set<String>()
-    var airport_preferences = Dictionary<String, AnyObject>()
-    let airport_preferences_fname = "/Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist"
+    var displayedNetworks  = Array<String>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        model = (NSApp.delegate as! AppDelegate).model
         
+        model.loadNetworks()
+        
+        // See what properties we should ignore
         var ignoreSet = Set<String>()
         if let path = NSBundle.mainBundle().pathForResource("config", ofType: "plist") {
             if let config = NSDictionary(contentsOfFile: path) as? Dictionary<String, AnyObject> {
@@ -38,21 +38,18 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             }
         }
         var networkProperties = Set<String>()
-        if let dict = NSDictionary(contentsOfFile: airport_preferences_fname) as? Dictionary<String, AnyObject> {
-            airport_preferences = dict
-            networks = dict["KnownNetworks"] as! Dictionary<String, Dictionary<String, AnyObject>>
-            totalNetworksCell!.integerValue = networks.count
+        totalNetworksCell!.integerValue = model.networks.count
 
             // Go through all the networks, getting the property names
-            for (_,networkVals) in networks {
-                for (propertyName, _) in (networkVals) {
-                    if !ignoreSet.contains(propertyName){
-                        networkProperties.insert(propertyName)
-                    }
+         for (_,networkVals) in model.networks {
+            for (propertyName, _) in (networkVals) {
+                if !ignoreSet.contains(propertyName){
+                    networkProperties.insert(propertyName)
                 }
             }
         }
         
+       
         // Now add all the property names as colums
         //for propertyName in networkProperties {
         //    let column = NSTableColumn(identifier: propertyName)
@@ -67,18 +64,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
     
     func displayNetworksMatching(s:String) {
-        displayedNetworks.removeAllObjects()
-        for (netName,networkVals) in networks {
-            for (_,val) in networkVals {
-                if let val_string = val as? String {
-                    if s=="" || (val_string.lowercaseString.rangeOfString(s.lowercaseString) != nil) {
-                        displayedNetworks.addObject(netName)
-                        break
-                    }
-                }
-            }
-        }
-        totalNetworksCell.integerValue = networks.count
+        displayedNetworks = model.matchingNetworks(s)
+        totalNetworksCell.integerValue = model.networks.count
         self.tableView.reloadData()
     }
     
@@ -90,15 +77,10 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         return self.displayedNetworks.count
     }
 
-   
-    //if title == "select" {
-    //    return selectedNetworks.contains(networkName) || tableView.selectedRowIndexes.containsIndex(row)
-    //}
- 
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let identifier = tableColumn!.identifier
-        let networkName = displayedNetworks.objectAtIndex(row) as! String
-        let networkVals = networks[networkName]!
+        let networkName = displayedNetworks[row]
+        let networkVals = model.networks[networkName]!
         if let val: AnyObject = networkVals[identifier]  {
             var obj = tableView.makeViewWithIdentifier(identifier, owner:self)
             if (obj==nil) {
@@ -114,46 +96,59 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         return nil
     }
     
-    func tableViewSelectionDidChange(notification: NSNotification)
-    {
-        if (self.tableView.numberOfSelectedRows > 0) {
-            if let networkName = self.displayedNetworks.objectAtIndex(self.tableView.selectedRow) as? String {
-                if selectedNetworks.contains(networkName){
-                    selectedNetworks.remove(networkName)
-                } else {
-                    selectedNetworks.insert(networkName)
-                }
-            }
-            //self.tableView.deselectRow(self.tableView.selectedRow)
-        }
-        
-    }
+//    func tableViewSelectionDidChange(notification: NSNotification)
+//    {
+//        view.window!.delegate = self
+//    
+//        if (self.tableView.numberOfSelectedRows > 0) {
+//            if let networkName = self.displayedNetworks.objectAtIndex(self.tableView.selectedRow) as? String {
+//                if selectedNetworks.contains(networkName){
+//                    selectedNetworks.remove(networkName)
+//                } else {
+//                    selectedNetworks.insert(networkName)
+//                }
+//            }
+//            //self.tableView.deselectRow(self.tableView.selectedRow)
+//        }
+//    }
+
     @IBAction func save(sender: NSControl) {
-        let d = airport_preferences as NSDictionary
-        let fname = NSTemporaryDirectory() + "/preferences.new"
-        d.writeToFile(fname,atomically:false)
-        print("written to",fname)
-        
-        let old_signal = signal(SIGPIPE,SIG_IGN)
-        let data =  NSData(contentsOfFile: fname)
-        let task = NSTask()
-        task.launchPath = "/usr/libexec/authopen"
-        task.arguments = ["-c","-w","/etc/xxx-3"]
-        let pipe = NSPipe()
-        task.standardInput = pipe
-        task.launch()
-        pipe.fileHandleForWriting.writeData(data!)
-        pipe.fileHandleForWriting.closeFile()
-        task.waitUntilExit()
-        signal(SIGPIPE,old_signal)
+        model.save()
     }
     
     @IBAction func deleteSelected(sender: NSButton) {
+        // Build a set of the network names to delete
+        let toDelete = NSMutableSet()
         for i in self.tableView.selectedRowIndexes {
-            print("row",i,"is selected",displayedNetworks[i],networks[displayedNetworks[i] as! String])
+            toDelete.addObject(displayedNetworks[i])
         }
-        
+        // remove them from what's displayed
+        displayedNetworks = displayedNetworks.filter({!toDelete.containsObject($0)})
+        // remove them from the model
+        for obj in toDelete {
+            model.deleteNetwork(obj as! String)
+            view.window!.documentEdited=true
+        }
+        tableView.reloadData()
     }
     
+    func windowShouldClose(sender: AnyObject) -> Bool {
+        if model.dirty {
+            let alert = NSAlert()
+            alert.messageText = "Save Changes?"
+            alert.addButtonWithTitle("Yes")
+            alert.addButtonWithTitle("No")
+            alert.informativeText = "You have made changes, do you want to discard them?"
+            if alert.runModal() == NSAlertFirstButtonReturn {
+                return true;
+            }
+            return false
+        }
+        return true
+    }
+    
+    func windowWillClose(notification: NSNotification) {
+        NSApp.terminate(self)
+    }
 }
 
