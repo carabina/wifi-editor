@@ -25,29 +25,30 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // get the model
         model = (NSApp.delegate as! AppDelegate).model
-        
         model.loadNetworks()
         
         // See what properties we should ignore
-        var ignoreSet = Set<String>()
-        if let path = NSBundle.mainBundle().pathForResource("config", ofType: "plist") {
-            if let config = NSDictionary(contentsOfFile: path) as? Dictionary<String, AnyObject> {
-                let ignoreArray = config["ignore"] as! Array<String>
-                ignoreSet = Set<String>(ignoreArray)
-            }
-        }
-        var networkProperties = Set<String>()
-        totalNetworksCell!.integerValue = model.networks.count
-
-            // Go through all the networks, getting the property names
-         for (_,networkVals) in model.networks {
-            for (propertyName, _) in (networkVals) {
-                if !ignoreSet.contains(propertyName){
-                    networkProperties.insert(propertyName)
-                }
-            }
-        }
+//        var ignoreSet = Set<String>()
+//        if let path = NSBundle.mainBundle().pathForResource("config", ofType: "plist") {
+//            if let config = NSDictionary(contentsOfFile: path) as? Dictionary<String, AnyObject> {
+//                let ignoreArray = config["ignore"] as! Array<String>
+//                ignoreSet = Set<String>(ignoreArray)
+//            }
+//        }
+//        var networkProperties = Set<String>()
+//        totalNetworksCell!.integerValue = model.networks.count
+//
+//            // Go through all the networks, getting the property names
+//         for (_,networkVals) in model.networks {
+//            for (propertyName, _) in (networkVals) {
+//                if !ignoreSet.contains(propertyName){
+//                    networkProperties.insert(propertyName)
+//                }
+//            }
+//        }
         
        
         // Now add all the property names as colums
@@ -58,8 +59,25 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         //    column.editable = false
         //    self.tableView.addTableColumn(column)
         //}
-        self.tableView.reloadData()
+        //self.tableView.reloadData()
+        if let sd = tableView.tableColumnWithIdentifier("SSIDString")?.sortDescriptorPrototype {
+            tableView.sortDescriptors=[sd]
+            model.sortDescriptors = tableView.sortDescriptors
+        }
         displayNetworksMatching("")
+        
+        // Now size each of the rows
+        for column in tableView.tableColumns {
+            column.sizeToFit()               // size to width of title
+            var maxWidth = column.width
+            for row in 0..<displayedNetworks.count {
+                if let cell = self.tableView(tableView, viewForTableColumn:column, row:row)  {
+                    let ct = cell as! NSTableCellView
+                    maxWidth = max(maxWidth,ct.textField!.intrinsicContentSize.width)
+                }
+            }
+            column.width = maxWidth         // size to width of title or text
+        }
     }
 
     
@@ -96,6 +114,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         return nil
     }
     
+    func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
+        print("old:",oldDescriptors)
+        print("new:",tableView.sortDescriptors)
+        model.sortDescriptors = tableView.sortDescriptors
+        displayNetworksMatching(searchField.stringValue) // do another sort
+    }
+    
 //    func tableViewSelectionDidChange(notification: NSNotification)
 //    {
 //        view.window!.delegate = self
@@ -111,16 +136,30 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 //            //self.tableView.deselectRow(self.tableView.selectedRow)
 //        }
 //    }
+    
+    func selectedNetworks() -> Array<String> {
+        return tableView.selectedRowIndexes.map({displayedNetworks[$0]})
+    }
 
+    @IBAction func copy(sender: NSControl){
+        let strValue = "\(selectedNetworks().map({model.networks[$0]!}))"
+        let pasteBoard = NSPasteboard.generalPasteboard()
+        pasteBoard.clearContents()
+        pasteBoard.writeObjects([strValue])
+    }
+    
     @IBAction func save(sender: NSControl) {
         model.save()
     }
+    // http://techone.xyz/using-nstableview-animations-with-bindings/
     
     @IBAction func deleteSelected(sender: NSButton) {
         // Build a set of the network names to delete
+        let selectedRows = self.tableView.selectedRowIndexes
         let toDelete = NSMutableSet()
-        for i in self.tableView.selectedRowIndexes {
+        for i in selectedRows {
             toDelete.addObject(displayedNetworks[i])
+            self.tableView.deselectRow(i)
         }
         // remove them from what's displayed
         displayedNetworks = displayedNetworks.filter({!toDelete.containsObject($0)})
@@ -129,7 +168,12 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             model.deleteNetwork(obj as! String)
             view.window!.documentEdited=true
         }
-        tableView.reloadData()
+        // http://techone.xyz/using-nstableview-animations-with-bindings/
+        NSAnimationContext.runAnimationGroup(
+            {context in self.tableView.removeRowsAtIndexes(selectedRows,withAnimation: [.EffectFade, .SlideUp])},
+            completionHandler:{}
+        )
+        //tableView.reloadData()
     }
     
     func windowShouldClose(sender: AnyObject) -> Bool {
@@ -149,6 +193,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     func windowWillClose(notification: NSNotification) {
         NSApp.terminate(self)
+        print("sending terminate")
     }
 }
 

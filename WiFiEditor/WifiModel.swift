@@ -8,12 +8,33 @@
 
 import Foundation
 
+
+func networkSortFunction(a:AnyObject, b:AnyObject, ctx:UnsafeMutablePointer<Void>) -> Int {
+    let model = WifiModel.theModel!
+    print(model.sortDescriptors)
+    for s in model.sortDescriptors {
+        if let avalue = model.networks[a as! String]![s.key!] {
+            if let bvalue = model.networks[b as! String]![s.key!] {
+                let cmp    = avalue.compare(bvalue).rawValue
+                if cmp != 0 {
+                    if s.ascending { return cmp}
+                    return -cmp
+                }
+            }
+        }
+    }
+    return 0
+}
+
+
 @objc
 class WifiModel:NSObject {
+    static var theModel:WifiModel?
+    let airport_preferences_fname = "/Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist"
     var networks = Dictionary<String, Dictionary<String, AnyObject>>()
     var airport_preferences = Dictionary<String, AnyObject>()
     var dirty = true
-    let airport_preferences_fname = "/Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist"
+    var sortDescriptors = [NSSortDescriptor]()
 
     func loadNetworks() {
         if let dict = NSDictionary(contentsOfFile: airport_preferences_fname) as? Dictionary<String, AnyObject> {
@@ -23,17 +44,30 @@ class WifiModel:NSObject {
         }
     }
     
-    func matchingNetworks(s:String) -> Array<String> {
-        let ret = NSMutableArray()
-        for (netName,networkVals) in networks {
-            for (_,val) in networkVals {
-                if let val_string = val as? String {
-                    if s=="" || (val_string.lowercaseString.rangeOfString(s.lowercaseString) != nil) {
-                        ret.addObject(netName)
-                    }
+    func doesNetworkMatch(networkVals:Dictionary<String,AnyObject>,s:String) -> Bool{
+        for (_,val) in networkVals {
+            if let val_string = val as? String {
+                if s=="" || (val_string.lowercaseString.rangeOfString(s.lowercaseString) != nil) {
+                    return true
                 }
             }
         }
+        return false
+    }
+    
+    
+    // Returns a sorted list of the current networks
+    func matchingNetworks(s:String) -> Array<String> {
+        let ret = NSMutableArray()
+        for (netName,netVals) in networks {
+            if doesNetworkMatch(netVals,s:s) {
+                ret.addObject(netName)
+            }
+        }
+        // Now sort according to sortDescriptors.
+        // This is very gross
+        WifiModel.theModel = self
+        ret.sortUsingFunction(networkSortFunction,context: nil)
         return ret as AnyObject as! [String];
     }
     
