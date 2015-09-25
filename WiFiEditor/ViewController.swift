@@ -76,7 +76,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                     maxWidth = max(maxWidth,ct.textField!.intrinsicContentSize.width)
                 }
             }
-            column.width = maxWidth         // size to width of title or text
+            column.width = maxWidth        // size to width of title or text plus a buffer
         }
     }
 
@@ -103,8 +103,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             var obj = tableView.makeViewWithIdentifier(identifier, owner:self)
             if (obj==nil) {
                 // No existing cell to reuse, so make a new one
-                // https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/TableView/PopulatingView-TablesProgrammatically/PopulatingView-TablesProgrammatically.html#//apple_ref/doc/uid/10000026i-CH14-SW1
-                obj = NSTableCellView(frame:NSMakeRect(0,0,100,100))
+                obj = NSTableCellView(frame:NSMakeRect(0,0,400,400))
                 obj!.identifier = identifier
             }
             let cellView = obj as! NSTableCellView
@@ -115,27 +114,10 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
-        print("old:",oldDescriptors)
-        print("new:",tableView.sortDescriptors)
         model.sortDescriptors = tableView.sortDescriptors
         displayNetworksMatching(searchField.stringValue) // do another sort
     }
     
-//    func tableViewSelectionDidChange(notification: NSNotification)
-//    {
-//        view.window!.delegate = self
-//    
-//        if (self.tableView.numberOfSelectedRows > 0) {
-//            if let networkName = self.displayedNetworks.objectAtIndex(self.tableView.selectedRow) as? String {
-//                if selectedNetworks.contains(networkName){
-//                    selectedNetworks.remove(networkName)
-//                } else {
-//                    selectedNetworks.insert(networkName)
-//                }
-//            }
-//            //self.tableView.deselectRow(self.tableView.selectedRow)
-//        }
-//    }
     
     func selectedNetworks() -> Array<String> {
         return tableView.selectedRowIndexes.map({displayedNetworks[$0]})
@@ -151,9 +133,18 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     @IBAction func save(sender: NSControl) {
         model.save()
     }
+    
+    @IBAction func saveAs(sender: NSControl) {
+        let pan = NSSavePanel()
+        let ret = pan.runModal()
+        if ret == NSFileHandlingPanelOKButton {
+            print("save",pan.URL?.path)
+        }
+    }
+    
     // http://techone.xyz/using-nstableview-animations-with-bindings/
     
-    @IBAction func deleteSelected(sender: NSButton) {
+    @IBAction func delete(sender: NSButton) {
         // Build a set of the network names to delete
         let selectedRows = self.tableView.selectedRowIndexes
         let toDelete = NSMutableSet()
@@ -173,27 +164,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             {context in self.tableView.removeRowsAtIndexes(selectedRows,withAnimation: [.EffectFade, .SlideUp])},
             completionHandler:{}
         )
-        //tableView.reloadData()
     }
     
-    func windowShouldClose(sender: AnyObject) -> Bool {
-        if model.dirty {
-            let alert = NSAlert()
-            alert.messageText = "Save Changes?"
-            alert.addButtonWithTitle("Yes")
-            alert.addButtonWithTitle("No")
-            alert.informativeText = "You have made changes, do you want to discard them?"
-            if alert.runModal() == NSAlertFirstButtonReturn {
-                return true;
-            }
-            return false
-        }
-        return true
-    }
     
     func windowWillClose(notification: NSNotification) {
-        NSApp.terminate(self)
         print("sending terminate")
+        NSApp.terminate(self)
+        print("sent terminate")
     }
 }
 

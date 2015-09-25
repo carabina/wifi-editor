@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		51880EE11BA2330800D3724E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBF1AF9750D003C4F32 /* Main.storyboard */; };
 		51880EE21BA2330B00D3724E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBD1AF9750D003C4F32 /* Images.xcassets */; };
+		5191D4731BB399DF0076470D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4721BB399DF0076470D /* WindowController.swift */; settings = {ASSET_TAGS = (); }; };
 		51C389AE1BA3A50900E92A53 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51C389AD1BA3A50900E92A53 /* config.plist */; };
 		51C389B21BA474AB00E92A53 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C389B11BA474AB00E92A53 /* ViewController.swift */; };
 		51D057C41BB0BF1300FC7DE5 /* WifiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D057C31BB0BF1300FC7DE5 /* WifiModel.swift */; settings = {ASSET_TAGS = (); }; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5191D4721BB399DF0076470D /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		51C389AD1BA3A50900E92A53 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		51C389B11BA474AB00E92A53 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		51D057C31BB0BF1300FC7DE5 /* WifiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiModel.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				78018CB91AF9750D003C4F32 /* AppDelegate.swift */,
 				51D057C31BB0BF1300FC7DE5 /* WifiModel.swift */,
 				51C389B11BA474AB00E92A53 /* ViewController.swift */,
+				5191D4721BB399DF0076470D /* WindowController.swift */,
 				51C389AD1BA3A50900E92A53 /* config.plist */,
 				78018CBD1AF9750D003C4F32 /* Images.xcassets */,
 				78018CBF1AF9750D003C4F32 /* Main.storyboard */,
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51C389B21BA474AB00E92A53 /* ViewController.swift in Sources */,
+				5191D4731BB399DF0076470D /* WindowController.swift in Sources */,
 				51D057C41BB0BF1300FC7DE5 /* WifiModel.swift in Sources */,
 				78018CBA1AF9750D003C4F32 /* AppDelegate.swift in Sources */,
 			);
