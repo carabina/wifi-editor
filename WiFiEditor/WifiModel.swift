@@ -47,6 +47,12 @@ class WifiModel:NSObject {
         }
     }
     
+//    var networks:Dictionary<String, Dictionary<String, AnyObject>> {
+//        get {
+//           return airport_preferences["KnownNetworks"] as! Dictionary<String, Dictionary<String, AnyObject>>
+//        }
+//    }
+    
     func doesNetworkMatch(networkVals:Dictionary<String,AnyObject>,s:String) -> Bool{
         for (_,val) in networkVals {
             if let val_string = val as? String {
@@ -77,27 +83,37 @@ class WifiModel:NSObject {
     func deleteNetwork(s:String) {
         dirty = true
         networks.removeValueForKey(s)
-        print("index:",preferred_order.indexOf(s))
         preferred_order.removeAtIndex(preferred_order.indexOf(s)!)
     }
     
     func saveAs(fname:String) {
-        let d = airport_preferences as NSDictionary
-        let fname = NSTemporaryDirectory() + "/preferences.new"
-        d.writeToFile(fname,atomically:false)
+        let d = NSMutableDictionary(dictionary:airport_preferences)
+        d["KnownNetworks"] = networks
+        d["PreferredOrder"] = preferred_order
         
-        let old_signal = signal(SIGPIPE,SIG_IGN)
-        let data =  NSData(contentsOfFile: fname)
+        let tempFileName = NSTemporaryDirectory() + "/preferences.new"
+        d.writeToFile(tempFileName,atomically:true)
+        
+        let data =  NSData(contentsOfFile: tempFileName)
+        print("tempfile:",fname,"length:",data!.length)
         let task = NSTask()
         task.launchPath = "/usr/libexec/authopen"
         task.arguments = ["-c","-w",fname]
+        print("arguments:",task.arguments)
         let pipe = NSPipe()
         task.standardInput = pipe
         task.launch()
+        let old_signal = signal(SIGPIPE,SIG_IGN)
         pipe.fileHandleForWriting.writeData(data!)
         pipe.fileHandleForWriting.closeFile()
         task.waitUntilExit()
+        print("tempfile:",tempFileName)
         signal(SIGPIPE,old_signal)
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(tempFileName)
+        } catch let error as NSError {
+            print(error.description)
+        }
     }
     
     func save() {

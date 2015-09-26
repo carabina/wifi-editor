@@ -178,14 +178,14 @@ CA
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="WiFi_Editor" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Wi-Fi Editor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" texturedBackground="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="263" width="865" height="247"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
-                            <outlet property="delegate" destination="B8D-0N-5wS" id="uXE-f9-rhd"/>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="fQQ-W5-ptZ"/>
                         </connections>
                     </window>
                     <connections>
@@ -194,7 +194,7 @@ CA
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="267.5" y="261.5"/>
+            <point key="canvasLocation" x="271.5" y="225.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">

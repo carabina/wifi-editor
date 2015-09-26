@@ -14,9 +14,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
         model = (NSApp.delegate as! AppDelegate).model  // get the model
+    }
     
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-        window!.delegate = self
+    func windowWillClose(notification: NSNotification) {
+        NSApp.terminate(self)
     }
 
     func windowShouldClose(sender: AnyObject) -> Bool {
@@ -33,5 +34,5 @@ class WindowController: NSWindowController, NSWindowDelegate {
         }
         return true
     }
-
+    
 }

@@ -80,10 +80,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         }
     }
 
+    func updateCounters() {
+        totalNetworksCell.integerValue = model.networks.count
+        totalSelectedCell.integerValue = tableView.selectedRowIndexes.count
+    }
     
     func displayNetworksMatching(s:String) {
         displayedNetworks = model.matchingNetworks(s)
-        totalNetworksCell.integerValue = model.networks.count
         self.tableView.reloadData()
     }
     
@@ -138,7 +141,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         let pan = NSSavePanel()
         let ret = pan.runModal()
         if ret == NSFileHandlingPanelOKButton {
-            print("save",pan.URL?.path)
+            model.saveAs((pan.URL?.path)!)
         }
     }
     
@@ -164,13 +167,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             {context in self.tableView.removeRowsAtIndexes(selectedRows,withAnimation: [.EffectFade, .SlideUp])},
             completionHandler:{}
         )
+        updateCounters()
     }
-    
-    
-    func windowWillClose(notification: NSNotification) {
-        print("sending terminate")
-        NSApp.terminate(self)
-        print("sent terminate")
-    }
+   
 }
 
