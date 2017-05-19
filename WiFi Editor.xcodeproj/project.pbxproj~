@@ -9,13 +9,8 @@
 /* Begin PBXBuildFile section */
 		51880EE11BA2330800D3724E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBF1AF9750D003C4F32 /* Main.storyboard */; };
 		51880EE21BA2330B00D3724E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78018CBD1AF9750D003C4F32 /* Images.xcassets */; };
-		5191D4731BB399DF0076470D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191D4721BB399DF0076470D /* WindowController.swift */; settings = {ASSET_TAGS = (); }; };
-		51A0CDC31BB61D6900E31331 /* Documentation.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 51A0CDC21BB61D6900E31331 /* Documentation.rtfd */; settings = {ASSET_TAGS = (); }; };
-		51A0CDC61BB6EE5300E31331 /* Documentation.webarchive in Resources */ = {isa = PBXBuildFile; fileRef = 51A0CDC51BB6EE5300E31331 /* Documentation.webarchive */; settings = {ASSET_TAGS = (); }; };
-		51C389AE1BA3A50900E92A53 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51C389AD1BA3A50900E92A53 /* config.plist */; };
-		51C389B21BA474AB00E92A53 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C389B11BA474AB00E92A53 /* ViewController.swift */; };
-		51D057C41BB0BF1300FC7DE5 /* WifiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D057C31BB0BF1300FC7DE5 /* WifiModel.swift */; settings = {ASSET_TAGS = (); }; };
 		78018CBA1AF9750D003C4F32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CB91AF9750D003C4F32 /* AppDelegate.swift */; };
+		78018CBC1AF9750D003C4F32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CBB1AF9750D003C4F32 /* ViewController.swift */; };
 		78018CCD1AF9750D003C4F32 /* WiFiEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78018CCC1AF9750D003C4F32 /* WiFiEditorTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,21 +20,15 @@
 			containerPortal = 78018CAC1AF9750D003C4F32 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 78018CB31AF9750D003C4F32;
-			remoteInfo = WiFiEditor;
+			remoteInfo = NSTableView;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5191D4721BB399DF0076470D /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
-		51A0CDC21BB61D6900E31331 /* Documentation.rtfd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.rtfd; path = Documentation.rtfd; sourceTree = "<group>"; };
-		51A0CDC51BB6EE5300E31331 /* Documentation.webarchive */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Documentation.webarchive; sourceTree = "<group>"; };
-		51A0CDC71BB6F2A500E31331 /* WiFi Editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WiFi Editor.entitlements"; sourceTree = "<group>"; };
-		51C389AD1BA3A50900E92A53 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
-		51C389B11BA474AB00E92A53 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		51D057C31BB0BF1300FC7DE5 /* WifiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiModel.swift; sourceTree = "<group>"; };
 		78018CB41AF9750D003C4F32 /* WiFi Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WiFi Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78018CB81AF9750D003C4F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78018CB91AF9750D003C4F32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		78018CBB1AF9750D003C4F32 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		78018CBD1AF9750D003C4F32 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		78018CC01AF9750D003C4F32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		78018CC61AF9750D003C4F32 /* WiFi EditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WiFi EditorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,7 +57,6 @@
 		78018CAB1AF9750D003C4F32 = {
 			isa = PBXGroup;
 			children = (
-				51A0CDC71BB6F2A500E31331 /* WiFi Editor.entitlements */,
 				78018CB61AF9750D003C4F32 /* WiFiEditor */,
 				78018CC91AF9750D003C4F32 /* WifiEditorTests */,
 				78018CB51AF9750D003C4F32 /* Products */,
@@ -88,23 +76,19 @@
 			isa = PBXGroup;
 			children = (
 				78018CB91AF9750D003C4F32 /* AppDelegate.swift */,
-				51D057C31BB0BF1300FC7DE5 /* WifiModel.swift */,
-				51C389B11BA474AB00E92A53 /* ViewController.swift */,
-				5191D4721BB399DF0076470D /* WindowController.swift */,
-				51C389AD1BA3A50900E92A53 /* config.plist */,
+				78018CBB1AF9750D003C4F32 /* ViewController.swift */,
 				78018CBD1AF9750D003C4F32 /* Images.xcassets */,
 				78018CBF1AF9750D003C4F32 /* Main.storyboard */,
 				78018CB71AF9750D003C4F32 /* Supporting Files */,
 			);
-			path = WiFiEditor;
+			name = WiFiEditor;
+			path = NSTableView;
 			sourceTree = "<group>";
 		};
 		78018CB71AF9750D003C4F32 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				78018CB81AF9750D003C4F32 /* Info.plist */,
-				51A0CDC21BB61D6900E31331 /* Documentation.rtfd */,
-				51A0CDC51BB6EE5300E31331 /* Documentation.webarchive */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -116,7 +100,7 @@
 				78018CCA1AF9750D003C4F32 /* Supporting Files */,
 			);
 			name = WifiEditorTests;
-			path = WiFiEditorTests;
+			path = NSTableViewTests;
 			sourceTree = "<group>";
 		};
 		78018CCA1AF9750D003C4F32 /* Supporting Files */ = {
@@ -143,7 +127,7 @@
 			dependencies = (
 			);
 			name = "WiFi Editor";
-			productName = WiFiEditor;
+			productName = NSTableView;
 			productReference = 78018CB41AF9750D003C4F32 /* WiFi Editor.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -161,7 +145,7 @@
 				78018CC81AF9750D003C4F32 /* PBXTargetDependency */,
 			);
 			name = "WiFi EditorTests";
-			productName = WiFiEditorTests;
+			productName = NSTableViewTests;
 			productReference = 78018CC61AF9750D003C4F32 /* WiFi EditorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -171,17 +155,11 @@
 		78018CAC1AF9750D003C4F32 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = Nitroba;
 				TargetAttributes = {
 					78018CB31AF9750D003C4F32 = {
 						CreatedOnToolsVersion = 6.3.1;
-						SystemCapabilities = {
-							com.apple.Sandbox = {
-								enabled = 1;
-							};
-						};
 					};
 					78018CC51AF9750D003C4F32 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -214,10 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51880EE21BA2330B00D3724E /* Images.xcassets in Resources */,
-				51A0CDC61BB6EE5300E31331 /* Documentation.webarchive in Resources */,
-				51A0CDC31BB61D6900E31331 /* Documentation.rtfd in Resources */,
 				51880EE11BA2330800D3724E /* Main.storyboard in Resources */,
-				51C389AE1BA3A50900E92A53 /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,9 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51C389B21BA474AB00E92A53 /* ViewController.swift in Sources */,
-				5191D4731BB399DF0076470D /* WindowController.swift in Sources */,
-				51D057C41BB0BF1300FC7DE5 /* WifiModel.swift in Sources */,
+				78018CBC1AF9750D003C4F32 /* ViewController.swift in Sources */,
 				78018CBA1AF9750D003C4F32 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,7 +266,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -357,11 +329,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "WiFi Editor.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = WiFiEditor/Info.plist;
+				INFOPLIST_FILE = NSTableView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nitroba.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "WiFi Editor";
 			};
 			name = Debug;
@@ -370,11 +340,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "WiFi Editor.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = WiFiEditor/Info.plist;
+				INFOPLIST_FILE = NSTableView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nitroba.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "WiFi Editor";
 			};
 			name = Release;
@@ -392,11 +360,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = WiFiEditorTests/Info.plist;
+				INFOPLIST_FILE = NSTableViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.veasoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "WiFi EditorTests";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WiFiEditor.app/Contents/MacOS/WiFiEditor";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NSTableView.app/Contents/MacOS/NSTableView";
 			};
 			name = Debug;
 		};
@@ -409,11 +376,10 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = WiFiEditorTests/Info.plist;
+				INFOPLIST_FILE = NSTableViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.veasoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "WiFi EditorTests";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WiFiEditor.app/Contents/MacOS/WiFiEditor";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NSTableView.app/Contents/MacOS/NSTableView";
 			};
 			name = Release;
 		};

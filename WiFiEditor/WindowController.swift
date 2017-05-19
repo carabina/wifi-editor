@@ -35,4 +35,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
         return true
     }
     
+    func showHelp(sender: AnyObject) {
+        if let helpFilePath = NSBundle.mainBundle().pathForResource("Documentation", ofType: "webarchive") {
+            let helpFileURL = NSURL.fileURLWithPath(helpFilePath)
+            NSWorkspace.sharedWorkspace().openURL(helpFileURL)
+        }
+    }
+    
 }

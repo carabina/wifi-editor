@@ -19,6 +19,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     @IBOutlet weak var totalSelectedCell: NSTextField!
     @IBOutlet weak var searchField: NSSearchField!
     @IBOutlet weak var statusField: NSTextField!
+    @IBOutlet weak var helpController: NSViewController!
+    
     var model:WifiModel!
     
     var displayedNetworks  = Array<String>()
@@ -30,36 +32,6 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         model = (NSApp.delegate as! AppDelegate).model
         model.loadNetworks()
         
-        // See what properties we should ignore
-//        var ignoreSet = Set<String>()
-//        if let path = NSBundle.mainBundle().pathForResource("config", ofType: "plist") {
-//            if let config = NSDictionary(contentsOfFile: path) as? Dictionary<String, AnyObject> {
-//                let ignoreArray = config["ignore"] as! Array<String>
-//                ignoreSet = Set<String>(ignoreArray)
-//            }
-//        }
-//        var networkProperties = Set<String>()
-//        totalNetworksCell!.integerValue = model.networks.count
-//
-//            // Go through all the networks, getting the property names
-//         for (_,networkVals) in model.networks {
-//            for (propertyName, _) in (networkVals) {
-//                if !ignoreSet.contains(propertyName){
-//                    networkProperties.insert(propertyName)
-//                }
-//            }
-//        }
-        
-       
-        // Now add all the property names as colums
-        //for propertyName in networkProperties {
-        //    let column = NSTableColumn(identifier: propertyName)
-        //    column.width = 50
-        //    column.title = propertyName
-        //    column.editable = false
-        //    self.tableView.addTableColumn(column)
-        //}
-        //self.tableView.reloadData()
         if let sd = tableView.tableColumnWithIdentifier("SSIDString")?.sortDescriptorPrototype {
             tableView.sortDescriptors=[sd]
             model.sortDescriptors = tableView.sortDescriptors
@@ -78,6 +50,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             }
             column.width = maxWidth        // size to width of title or text plus a buffer
         }
+        statusField.stringValue = ""
+        totalSelectedCell.integerValue=0
     }
 
     func updateCounters() {
@@ -88,6 +62,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     func displayNetworksMatching(s:String) {
         displayedNetworks = model.matchingNetworks(s)
         self.tableView.reloadData()
+        totalNetworksCell.integerValue = model.networks.count
     }
     
     @IBAction func search(sender: NSSearchField) {
@@ -121,6 +96,9 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         displayNetworksMatching(searchField.stringValue) // do another sort
     }
     
+    func tableViewSelectionDidChange(notification: NSNotification) {
+        totalSelectedCell.integerValue = tableView.selectedRowIndexes.count
+    }
     
     func selectedNetworks() -> Array<String> {
         return tableView.selectedRowIndexes.map({displayedNetworks[$0]})
@@ -141,12 +119,18 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         let pan = NSSavePanel()
         let ret = pan.runModal()
         if ret == NSFileHandlingPanelOKButton {
-            model.saveAs((pan.URL?.path)!)
+            if let path = pan.URL?.path {
+                model.saveAs(path)
+
+                let pan = NSAlert()
+                pan.addButtonWithTitle("OK")
+                pan.messageText = "The preferences file has been saved. To move the file into the correct location, open the Terminal application and type this command:\n\nsudo mv "+path+" "+model.airport_preferences_fname
+                pan.runModal()
+            }
+
         }
     }
-    
-    // http://techone.xyz/using-nstableview-animations-with-bindings/
-    
+        
     @IBAction func delete(sender: NSButton) {
         // Build a set of the network names to delete
         let selectedRows = self.tableView.selectedRowIndexes

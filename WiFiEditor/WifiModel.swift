@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Cocoa
 
 func networkSortFunction(a:AnyObject, b:AnyObject, ctx:UnsafeMutablePointer<Void>) -> Int {
     let model = WifiModel.theModel!
@@ -36,22 +36,25 @@ class WifiModel:NSObject {
     var networks = Dictionary<String, Dictionary<String, AnyObject>>()
     var preferred_order = Array<String>()
     var dirty = true
+    let KnownNetworks = "KnownNetworks"
+    let PreferredOrder = "PreferredOrder"
     var sortDescriptors = [NSSortDescriptor]()
 
     func loadNetworks() {
-        if let dict = NSDictionary(contentsOfFile: airport_preferences_fname) as? Dictionary<String, AnyObject> {
+        let pan = NSOpenPanel()
+        pan.title = "Select the com.apple.airport.preferences.plist file"
+        pan.directoryURL = NSURL(fileURLWithPath:airport_preferences_fname)
+        pan.runModal()
+        
+        //if let dict = NSDictionary(contentsOfFile: airport_preferences_fname) as? Dictionary<String, AnyObject> {
+        if let dict = NSDictionary(contentsOfURL: pan.URL!) as? Dictionary<String, AnyObject> {
             airport_preferences = dict
-            networks = dict["KnownNetworks"] as! Dictionary<String, Dictionary<String, AnyObject>>
-            preferred_order = dict["PreferredOrder"] as! Array<String>
+            networks = dict[KnownNetworks] as! Dictionary<String, Dictionary<String, AnyObject>>
+            preferred_order = dict[PreferredOrder] as! Array<String>
         } else {
         }
     }
     
-//    var networks:Dictionary<String, Dictionary<String, AnyObject>> {
-//        get {
-//           return airport_preferences["KnownNetworks"] as! Dictionary<String, Dictionary<String, AnyObject>>
-//        }
-//    }
     
     func doesNetworkMatch(networkVals:Dictionary<String,AnyObject>,s:String) -> Bool{
         for (_,val) in networkVals {
@@ -74,7 +77,6 @@ class WifiModel:NSObject {
             }
         }
         // Now sort according to sortDescriptors.
-        // This is very gross
         WifiModel.theModel = self
         ret.sortUsingFunction(networkSortFunction,context: nil)
         return ret as AnyObject as! [String];
@@ -87,19 +89,18 @@ class WifiModel:NSObject {
     }
     
     func saveAs(fname:String) {
+        // Create a dictory to write back out, and replace the knownNetworks and the preferredOrder
         let d = NSMutableDictionary(dictionary:airport_preferences)
-        d["KnownNetworks"] = networks
-        d["PreferredOrder"] = preferred_order
+        d[KnownNetworks] = networks
+        d[PreferredOrder] = preferred_order
         
         let tempFileName = NSTemporaryDirectory() + "/preferences.new"
         d.writeToFile(tempFileName,atomically:true)
         
         let data =  NSData(contentsOfFile: tempFileName)
-        print("tempfile:",fname,"length:",data!.length)
         let task = NSTask()
         task.launchPath = "/usr/libexec/authopen"
         task.arguments = ["-c","-w",fname]
-        print("arguments:",task.arguments)
         let pipe = NSPipe()
         task.standardInput = pipe
         task.launch()
@@ -107,7 +108,6 @@ class WifiModel:NSObject {
         pipe.fileHandleForWriting.writeData(data!)
         pipe.fileHandleForWriting.closeFile()
         task.waitUntilExit()
-        print("tempfile:",tempFileName)
         signal(SIGPIPE,old_signal)
         do {
             try NSFileManager.defaultManager().removeItemAtPath(tempFileName)
